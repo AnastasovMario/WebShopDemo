@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "QZuKcyGkMRilv6wXidd2VbM/6WKg4i7P0dzDA5Wuvdw=",
+  "Source": "WebShopDemo.gRPC",
+  "BasePath": "_content/WebShopDemo.gRPC",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

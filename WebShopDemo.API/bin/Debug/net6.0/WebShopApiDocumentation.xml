@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebShopDemo.API</name>
+    </assembly>
+    <members>
+        <member name="M:WebShopDemo.API.Controllers.ProductController.GetAll">
+            <summary>
+            Get All products
+            </summary>
+            <returns></returns>
+            В реално приложение е много важно това.
+        </member>
+    </members>
+</doc>

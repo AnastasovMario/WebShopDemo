@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebShopDemo.Core.Contracts;
+using WebShopDemo.Core.Data;
+using WebShopDemo.Core.Data.Common;
 using WebShopDemo.Core.Services;
-using WebShopDemo.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-	options.UseSqlServer(connectionString));
+	options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention());
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -20,6 +21,7 @@ builder.Services.AddControllersWithViews();
 //Singleton - само 1 инстанция
 //В рамките на request-a винаги е само една инстанция.
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 
@@ -45,6 +47,8 @@ app.UseRouting();
 //трябва да са след рутирането в този ред.
 app.UseAuthentication();
 app.UseAuthorization();
+
+//Default-ния се казва Index и всеки controller трябва да има такъв
 
 app.MapControllerRoute(
 	name: "default",
