@@ -10578,19 +10578,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Anast\\.nuget\\packages\\": {}
+    "C:\\Users\\MARIO\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Anast\\source\\repos\\WebShopDemo\\WebShopDemo\\WebShopDemo.csproj",
+      "projectUniqueName": "C:\\Users\\MARIO\\Documents\\GitHub\\WebShopDemo\\WebShopDemo\\WebShopDemo.csproj",
       "projectName": "WebShopDemo",
-      "projectPath": "C:\\Users\\Anast\\source\\repos\\WebShopDemo\\WebShopDemo\\WebShopDemo.csproj",
-      "packagesPath": "C:\\Users\\Anast\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Anast\\source\\repos\\WebShopDemo\\WebShopDemo\\obj\\",
+      "projectPath": "C:\\Users\\MARIO\\Documents\\GitHub\\WebShopDemo\\WebShopDemo\\WebShopDemo.csproj",
+      "packagesPath": "C:\\Users\\MARIO\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MARIO\\Documents\\GitHub\\WebShopDemo\\WebShopDemo\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Anast\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10604,8 +10609,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Anast\\source\\repos\\WebShopDemo\\WebShopDemo.Core\\WebShopDemo.Core.csproj": {
-              "projectPath": "C:\\Users\\Anast\\source\\repos\\WebShopDemo\\WebShopDemo.Core\\WebShopDemo.Core.csproj"
+            "C:\\Users\\MARIO\\Documents\\GitHub\\WebShopDemo\\WebShopDemo.Core\\WebShopDemo.Core.csproj": {
+              "projectPath": "C:\\Users\\MARIO\\Documents\\GitHub\\WebShopDemo\\WebShopDemo.Core\\WebShopDemo.Core.csproj"
             }
           }
         }
@@ -10672,7 +10677,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
