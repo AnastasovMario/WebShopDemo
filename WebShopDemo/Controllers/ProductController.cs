@@ -64,7 +64,7 @@ namespace WebShopDemo.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "CanDeleteProduct")]
+        //[Authorize(Policy = "CanDeleteProduct")]
         public async Task<IActionResult> Delete([FromForm] string id)
 		{
             Guid idGuid = Guid.Parse(id);
