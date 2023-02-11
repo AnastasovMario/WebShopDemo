@@ -13,8 +13,6 @@ namespace WebShopDemo.gRPC.Services
             productService = _productService;
         }
 
-        public int DaysMissing { get; set; }
-
         public override async Task<ProductList> GetAll(Empty request, ServerCallContext context)
         {
             ProductList result = new ProductList();

@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "dgSpecHash": "29kn6ov7HqnUc8UfAkk6n+yCbzMutHy1em7xcsSgU2hMetN7BCPGx/YEChjkuycegKNiCjAoluZJ58DBdn+wcA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\MARIO\\Documents\\GitHub\\WebShopDemo\\WebShopDemo.gRPC\\WebShopDemo.gRPC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MARIO\\.nuget\\packages\\google.protobuf\\3.18.0\\google.protobuf.3.18.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.aspnetcore\\2.40.0\\grpc.aspnetcore.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.aspnetcore.server\\2.40.0\\grpc.aspnetcore.server.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.aspnetcore.server.clientfactory\\2.40.0\\grpc.aspnetcore.server.clientfactory.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.core.api\\2.40.0\\grpc.core.api.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.net.client\\2.40.0\\grpc.net.client.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.net.clientfactory\\2.40.0\\grpc.net.clientfactory.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.net.common\\2.40.0\\grpc.net.common.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\grpc.tools\\2.40.0\\grpc.tools.2.40.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.0.3\\microsoft.extensions.configuration.binder.3.0.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.0.3\\microsoft.extensions.dependencyinjection.3.0.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.0.3\\microsoft.extensions.dependencyinjection.abstractions.3.0.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.http\\3.0.3\\microsoft.extensions.http.3.0.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.logging\\3.0.3\\microsoft.extensions.logging.3.0.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.3\\microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.options\\3.0.3\\microsoft.extensions.options.3.0.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\newtonsoft.json\\12.0.1\\newtonsoft.json.12.0.1.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\MARIO\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
