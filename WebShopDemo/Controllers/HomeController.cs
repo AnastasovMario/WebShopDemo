@@ -13,13 +13,44 @@ namespace WebShopDemo.Controllers
 			_logger = logger;
 		}
 
+
+
+		//public IActionResult Index()
+		//{
+		//	if (TempData.ContainsKey("LastAccessTime"))
+		//	{
+		//		TempData.Keep("LastAccessTime");
+
+		//		//temp-data e абстракция върху кукитата
+		//		return Ok(TempData.Peek("LastAccessTime"));
+		//	}
+		//	// записвам във въпросното куки datetime.now
+
+		//	this.HttpContext.Response.Cookies.Append("myCookie", "Pesho", new CookieOptions()
+		//	{
+
+		//	});
+
+		//	return View();
+		//}
 		public IActionResult Index()
 		{
+			//Това ще бъде записано в моята сесия
+			//Можем да логнем user-a, и след като знаем кой е, какви неща да му показваме
+			//Тук просто показваме как се сетва.
+			this.HttpContext.Session.SetString("name", "pesho");
+
 			return View();
 		}
 
 		public IActionResult Privacy()
 		{
+			string? name = this.HttpContext.Session.GetString("name");
+
+			if (string.IsNullOrEmpty(name))
+			{
+				return Ok(name);
+			}
 			return View();
 		}
 

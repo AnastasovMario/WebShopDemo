@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using WebShopDemo.Core.Contracts;
 using WebShopDemo.Core.Data;
 using WebShopDemo.Core.Data.Common;
@@ -8,9 +9,9 @@ using WebShopDemo.Core.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
+var connectionString = builder.Configuration.GetConnectionString("MSSQLConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-	options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention());
+	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -22,6 +23,16 @@ builder.Services.AddControllersWithViews();
 //В рамките на request-a винаги е само една инстанция.
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IRepository, Repository>();
+
+//добавяме cache
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+	//настройване на времето за сесията
+	options.IdleTimeout = TimeSpan.FromMinutes(5);
+	//хубаво е да го сетваме винаги на true;
+	options.Cookie.HttpOnly= true;
+});
 
 var app = builder.Build();
 
@@ -47,6 +58,8 @@ app.UseRouting();
 //трябва да са след рутирането в този ред.
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 //Default-ния се казва Index и всеки controller трябва да има такъв
 
