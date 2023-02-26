@@ -9,6 +9,7 @@ namespace WebShopDemo.Controllers
 	/// <summary>
 	///	Web shop products
 	/// </summary>
+	[Authorize]
 	public class ProductController : Controller
 	{
 		private readonly IProductService _productService;
@@ -27,6 +28,8 @@ namespace WebShopDemo.Controllers
 		/// List all products 
 		/// </summary>
 		/// <returns></returns>
+		[AllowAnonymous]		
+		
 		public async Task<IActionResult> Index()
 		{
 			var products = await _productService.GetAll();

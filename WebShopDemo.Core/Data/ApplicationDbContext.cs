@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebShopDemo.Core.Data.Models;
+using WebShopDemo.Core.Data.Models.Account;
 
 namespace WebShopDemo.Core.Data
 {
-	public class ApplicationDbContext : IdentityDbContext
+	//За да работи миграцията, трябва да сложим ApplicationUser-a
+	public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 	{
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
@@ -20,7 +22,5 @@ namespace WebShopDemo.Core.Data
 
 		//След като създадем Модела, трябва да го инициализираме в db context-a
 		public DbSet<Product> Products { get; set; }
-
-		public DbSet<User> Users { get; set; }
 	}
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebShopDemo.Core.Contracts;
+using WebShopDemo.Core.Data;
 using WebShopDemo.Core.Data.Common;
 using WebShopDemo.Core.Data.Models;
 using WebShopDemo.Core.Models;
@@ -23,11 +24,11 @@ namespace WebShopDemo.Core.Services
 		private readonly IRepository repo;
 
 		/// <summary>
-		/// 
+		/// IoC 
 		/// </summary>
-		/// <param name="config">Application configuration</param>
-		public ProductService
-			(IConfiguration _config,
+		/// <param name="_config">Application configuration</param>
+		public ProductService(
+			IConfiguration _config,
 			IRepository _repo)
 		{
 			config = _config;
@@ -39,40 +40,38 @@ namespace WebShopDemo.Core.Services
 		/// </summary>
 		/// <param name="productDto">Product model</param>
 		/// <returns></returns>
-		/// <exception cref="NotImplementedException"></exception>
-        public async Task Add(ProductDto productDto)
-        {
-			//Създаваме си продукт, добавяме го и запазваме промените;
+		public async Task Add(ProductDto productDto)
+		{
 			var product = new Product()
 			{
 				Name = productDto.Name,
 				Price = productDto.Price,
 				Quantity = productDto.Quantity
 			};
-			//репоситорито ни пази от това да правим глупости в контекста
-			//правим абстракция от контекста
+
 			await repo.AddAsync(product);
 			await repo.SaveChangesAsync();
-        }
-        public async Task Delete(Guid id)
-        {
-            var product = await repo.All<Product>()
-                .FirstOrDefaultAsync(p => p.Id == id);
+		}
 
-            if (product != null)
-            {
-                product.IsActive = false;
-
-                await repo.SaveChangesAsync();
-            }
-        }
-        /// <summary>
-        /// Gets all products
-        /// </summary>
-        /// <returns>List of products</returns>
-        public async Task<IEnumerable<ProductDto>> GetAll()
+		public async Task Delete(Guid id)
 		{
-			//От репоти изключвайки change tracker-a, взимаме ги и ги мап-ваме
+			var product = await repo.All<Product>()
+				.FirstOrDefaultAsync(p => p.Id == id);
+
+			if (product != null)
+			{
+				product.IsActive = false;
+
+				await repo.SaveChangesAsync();
+			}
+		}
+
+		/// <summary>
+		/// Gets all products
+		/// </summary>
+		/// <returns>List of products</returns>
+		public async Task<IEnumerable<ProductDto>> GetAll()
+		{
 			return await repo.AllReadonly<Product>()
 				.Where(p => p.IsActive)
 				.Select(p => new ProductDto()

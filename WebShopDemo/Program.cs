@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using WebShopDemo.Core.Contracts;
 using WebShopDemo.Core.Data;
 using WebShopDemo.Core.Data.Common;
+using WebShopDemo.Core.Data.Models.Account;
 using WebShopDemo.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +15,34 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-	.AddEntityFrameworkStores<ApplicationDbContext>();
+
+//това е за логин
+//Service configure ни помага да конфигурираме всичко по проекта.
+//AddDefaultIdentity конфигурираме identity-то.
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+	options.SignIn.RequireConfirmedAccount = true;
+	//най-важно е конфигурирането на паролата.
+	options.Password.RequireNonAlphanumeric = true;
+	options.Password.RequiredLength = 6;
+
+	//Всеки user да има имейл
+	options.User.RequireUniqueEmail = true;
+	//Това, което го няма в тези символи, не може да го въведеш;
+	//options.User.AllowedUserNameCharacters;
+
+	//Колко локаута може да има
+	options.Lockout.MaxFailedAccessAttempts = 5;
+}).AddEntityFrameworkStores<ApplicationDbContext>();
+
+//ще ни върне към login страницата и ще ни подаде login url-то.
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	//Има hidden поленце, където се поства returnUrl-то
+    options.LoginPath = "/Account/Login";
+});
+
+
 builder.Services.AddControllersWithViews();
 
 //Transient - всеки път дава различна инстанция
@@ -31,7 +58,7 @@ builder.Services.AddSession(options =>
 	//настройване на времето за сесията
 	options.IdleTimeout = TimeSpan.FromMinutes(5);
 	//хубаво е да го сетваме винаги на true;
-	options.Cookie.HttpOnly= true;
+	options.Cookie.HttpOnly = true;
 });
 
 var app = builder.Build();
