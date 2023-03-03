@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using WebShopDemo.Core.Constants;
 using WebShopDemo.Core.Contracts;
 using WebShopDemo.Core.Data;
 using WebShopDemo.Core.Data.Common;
@@ -33,7 +34,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 	//Колко локаута може да има
 	options.Lockout.MaxFailedAccessAttempts = 5;
-}).AddEntityFrameworkStores<ApplicationDbContext>();
+	//addRoles го екстендваме, когато искаме да добавим роли.
+}).AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
 //ще ни върне към login страницата и ще ни подаде login url-то.
 builder.Services.ConfigureApplicationCookie(options =>
@@ -41,7 +44,13 @@ builder.Services.ConfigureApplicationCookie(options =>
 	//Има hidden поленце, където се поства returnUrl-то
     options.LoginPath = "/Account/Login";
 });
-
+builder.Services.AddAuthorization(options =>
+{
+	//Искаме да добавим политика, която се казва "CanDeleteProduct", която очаква потребителят да е manager и supervisor
+	options.AddPolicy("CanDeleteProduct", policy =>
+		policy.RequireAssertion(context => 
+		context.User.IsInRole(RoleConstants.Manager) && context.User.IsInRole(RoleConstants.Supervisor)));
+});
 
 builder.Services.AddControllersWithViews();
 

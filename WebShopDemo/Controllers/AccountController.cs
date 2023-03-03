@@ -9,15 +9,19 @@ namespace WebShopDemo.Controllers
 {
     public class AccountController : BaseController
     {
+
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> _userManager,
-            SignInManager<ApplicationUser> _signInManager)
+            SignInManager<ApplicationUser> _signInManager,
+			RoleManager<IdentityRole> _roleManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            roleManager = _roleManager;
         }
 
         [HttpGet]
@@ -122,5 +126,36 @@ namespace WebShopDemo.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-    }
+
+        [AllowAnonymous]
+        //Създават се като напишем горе в полето /createRoles - 2:49:00 - обяснява как да се направят роли с interface
+        public async Task<IActionResult> CreateRoles()
+        {
+            //създаваме ролите
+            await roleManager.CreateAsync(new IdentityRole(RoleConstants.Manager));
+            await roleManager.CreateAsync(new IdentityRole(RoleConstants.Supervisor));
+            await roleManager.CreateAsync(new IdentityRole(RoleConstants.Administrator));
+
+
+            return RedirectToAction("Index", "Home");
+		}
+
+        //това може да се направи и през базата, просто гледаме как се прави през самите managers.
+        public async Task<IActionResult> AddUsersToRoles()
+        {
+            //това нещо трябва винаги да се случва през managers
+
+            string email = "pesho@abv.bg";
+            //string email1 = "mario@abv.bg";
+
+			var user = await userManager.FindByEmailAsync(email);
+			//var user1 = await userManager.FindByEmailAsync(email1);
+
+			await userManager.AddToRoleAsync(user, RoleConstants.Manager);
+			//Така се добавят повече от една роли на user
+			//await userManager.AddToRolesAsync(user, new string[] { RoleConstants.Manager, RoleConstants.Supervisor});
+
+			return RedirectToAction("Index", "Home");
+		}
+	}
 }

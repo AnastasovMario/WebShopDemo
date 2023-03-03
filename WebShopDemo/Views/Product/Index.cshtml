@@ -27,7 +27,7 @@
                 <td>
                     <form asp-action="Delete" asp-controller="Product" method="post">
                         <input name="id" type="hidden" value="@item.Id.ToString()" />
-                    <button type="submit" class="btn btn-danger" type="">Delete</button>
+                    <button type="submit" class="btn btn-danger" @User.IsInRole("Supervisor") ? "" : "disabled">Delete</button>
                     </form>
                 </td>
 

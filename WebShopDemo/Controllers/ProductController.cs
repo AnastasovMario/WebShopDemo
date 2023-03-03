@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebShopDemo.Core.Constants;
 using WebShopDemo.Core.Contracts;
 using WebShopDemo.Core.Models;
 using WebShopDemo.Core.Services;
@@ -40,7 +41,7 @@ namespace WebShopDemo.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		//
+		[Authorize(Roles = $"{RoleConstants.Manager}, {RoleConstants.Supervisor}")]
 		public IActionResult Add()
 		{
 			var model = new ProductDto();
@@ -51,7 +52,8 @@ namespace WebShopDemo.Controllers
 
 		[HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Add(ProductDto model)
+		[Authorize(Roles = $"{RoleConstants.Manager}, {RoleConstants.Supervisor}")]
+		public async Task<IActionResult> Add(ProductDto model)
 		{
 			//тази viewdata също трябва да се 
             ViewData["Title"] = "Add new product";
@@ -68,8 +70,9 @@ namespace WebShopDemo.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Policy = "CanDeleteProduct")]
-        public async Task<IActionResult> Delete([FromForm] string id)
+		// провери в Program, къде слагаме CanDeleteProduct
+		[Authorize(Policy = "CanDeleteProduct")]
+		public async Task<IActionResult> Delete([FromForm] string id)
 		{
             Guid idGuid = Guid.Parse(id);
             await _productService.Delete(idGuid);
