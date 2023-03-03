@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebShopDemo.Core.Constants;
 using WebShopDemo.Core.Data.Models.Account;
 using WebShopDemo.Models;
 
 namespace WebShopDemo.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -20,6 +21,8 @@ namespace WebShopDemo.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        //За методите, които искаме да ползваме преди да се регистрираме, трябва да им сложим allow annonymous.
         public async Task<IActionResult> Register()
         {
             var model = new RegisterViewModel();
@@ -46,7 +49,8 @@ namespace WebShopDemo.Controllers
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
-
+            //по този начин добавяме клеймове - най-добрият вариант е да се добавя при регистрация
+            await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(ClaimTypeConstants.FirstName, user.FirstName ?? user.Email));
 
             if (result.Succeeded)
             {
@@ -65,6 +69,7 @@ namespace WebShopDemo.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         //get метод, който ни препраща във view-то
         public async Task<IActionResult> Login(string returnUrl = null)
         {
@@ -89,7 +94,7 @@ namespace WebShopDemo.Controllers
             var user = await userManager.FindByEmailAsync(model.Email);
 
             if (user != null)
-            {
+            {                
                 // по този начин  проверяваме паролата на user-a;
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
 

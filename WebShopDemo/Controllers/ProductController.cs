@@ -10,8 +10,8 @@ namespace WebShopDemo.Controllers
 	///	Web shop products
 	/// </summary>
 	[Authorize]
-	public class ProductController : Controller
-	{
+	public class ProductController : BaseController
+    {
 		private readonly IProductService _productService;
 
 		/// <summary>
@@ -29,7 +29,6 @@ namespace WebShopDemo.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[AllowAnonymous]		
-		
 		public async Task<IActionResult> Index()
 		{
 			var products = await _productService.GetAll();
@@ -40,6 +39,7 @@ namespace WebShopDemo.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		//
 		public IActionResult Add()
 		{
@@ -50,7 +50,8 @@ namespace WebShopDemo.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Add(ProductDto model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Add(ProductDto model)
 		{
 			//тази viewdata също трябва да се 
             ViewData["Title"] = "Add new product";
